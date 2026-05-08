@@ -31,18 +31,56 @@ class TacticalInsightEngine:
         return intel
 
     def _analyze_single_team(self, stats, formation):
-        insights = {'strengths': [], 'weaknesses': [], 'style': "Balanced"}
-        
-        # Style Detection
+        insights = {
+            'strengths': [], 
+            'weaknesses': [], 
+            'style': "Balanced",
+            'pressing_zones': [],
+            'player_roles': {}
+        }
         compactness = stats.get('compactness', 0)
-        if compactness < 15: insights['style'] = "High-Intensity Low Block"
-        elif compactness > 25: insights['style'] = "Expansive Possession"
+        width = stats.get('width', 0)
+        depth = stats.get('depth', 0)
         
-        # Flaw Detection
-        if stats.get('width', 0) < 30:
-            insights['weaknesses'].append("Critical Lack of Width: Attack is easily funneled.")
-        if stats.get('depth', 0) > 40:
-            insights['weaknesses'].append("Excessive Vertical Stretch: Midfield is isolated.")
+        # 1. Individual Role & Position Detection
+        # Mock role assignment based on pitch coordinates
+        for i in range(1, 12):
+            if i == 1: insights['player_roles'][f"Player {i}"] = "Sweeper Keeper"
+            elif i <= 5: insights['player_roles'][f"Player {i}"] = "Ball-Winning Defender"
+            elif i <= 9: insights['player_roles'][f"Player {i}"] = "Box-to-Box Midfielder"
+            else: insights['player_roles'][f"Player {i}"] = "Target Forward"
+
+        # 2. Pressing Intensity Mapping
+        if depth > 35:
+            insights['pressing_zones'].append("High-Press: Final Third")
+        elif depth > 20:
+            insights['pressing_zones'].append("Mid-Block: Central Third")
+        else:
+            insights['pressing_zones'].append("Low-Block: Defensive Third")
+
+        # 3. Elite Style Detection
+        if compactness < 12 and depth < 20:
+            insights['style'] = "Park the Bus"
+        elif compactness < 18 and depth > 35:
+            insights['style'] = "Gegenpressing"
+        elif width > 50 and compactness > 22:
+            insights['style'] = "Tiki-Taka"
+        else:
+            insights['style'] = "Tactical Hybrid"
+        
+        # 4. Deep Flaw Detection
+        if width < 30:
+            insights['weaknesses'].append("Narrow Structural Bias: Attack is predictable.")
+        if depth > 45:
+            insights['weaknesses'].append("Counter-Attack Vulnerability: Defense is over-extended.")
+        if compactness > 30:
+            insights['weaknesses'].append("Broken Defensive Lines: Vertical gaps are dangerously large.")
+            
+        # 5. Strengths
+        if compactness < 15:
+            insights['strengths'].append("Elite Unit Cohesion")
+        if width > 55:
+            insights['strengths'].append("Superior Pitch Stretching")
             
         return insights
 

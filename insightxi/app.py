@@ -64,24 +64,30 @@ if uploaded_file:
         st.divider()
         st.subheader("⚔️ Competitive Matchup Analysis")
         st.info(f"**AI Verdict:** {intel['matchup_verdict']}")
-        
-        c1, c2 = st.columns(2)
-        with c1:
-            st.markdown(f"#### Team A <span class='style-badge'>{intel['team_a']['style']}</span>", unsafe_allow_html=True)
+               col1, col2 = st.columns(2)
+        with col1:
+            st.markdown(f"#### TEAM A <span class='style-badge'>{intel['team_a']['style']}</span>", unsafe_allow_html=True)
+            st.write(f"**Pressing Intensity:** {', '.join(intel['team_a']['pressing_zones'])}")
             st.metric("Compactness", f"{stats_a.get('compactness', 0):.1f}m")
+            
+            with st.expander("👤 Player Roles & Positions"):
+                for player, role in intel['team_a']['player_roles'].items():
+                    st.write(f"**{player}:** {role}")
+            
             for w in intel['team_a']['weaknesses']:
-                st.error(f"⚠️ {w}")
+                st.error(f"❌ {w}")
                 
-        with c2:
-            st.markdown(f"#### Team B <span class='style-badge'>{intel['team_b']['style']}</span>", unsafe_allow_html=True)
+        with col2:
+            st.markdown(f"#### TEAM B <span class='style-badge'>{intel['team_b']['style']}</span>", unsafe_allow_html=True)
+            st.write(f"**Pressing Intensity:** {', '.join(intel['team_b']['pressing_zones'])}")
             st.metric("Compactness", f"{stats_b.get('compactness', 0):.1f}m")
+            
+            with st.expander("👤 Player Roles & Positions"):
+                for player, role in intel['team_b']['player_roles'].items():
+                    st.write(f"**{player}:** {role}")
+            
             for w in intel['team_b']['weaknesses']:
-                st.error(f"⚠️ {w}")
-                
-        st.divider()
-        st.subheader("🛡️ Tactical Recovery Protocols")
-        for protocol in intel['recovery_protocols']:
-            st.markdown(f"""
+                st.error(f"❌ {w}")"
             <div class="recovery-card">
                 <strong>[RECOVERY] {protocol['team']}</strong><br>
                 <em>Detected Issue:</em> {protocol['issue']}<br>
