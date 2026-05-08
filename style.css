@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InsightXI | Elite AI Soccer Analysis</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="glow-text">⚽ InsightXI ELITE</h1>
+            <p class="subtitle">Autonomous Dual-Team Intelligence & Tactical Recovery</p>
+        </header>
+        
+        <main>
+            <section class="hero">
+                <h2>The Future of Soccer Analysis</h2>
+                <p>Upload your match footage and let our AI detect individual roles, team styles, and tactical flaws in real-time.</p>
+                <div class="cta-container">
+                    <a href="https://share.streamlit.io/" class="btn btn-primary">Launch AI Engine</a>
+                </div>
+            </section>
+
+            <section class="features">
+                <div class="feature-card">
+                    <h3>🧠 Role Detection</h3>
+                    <p>AI-driven identification of individual player positions and tactical roles.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚔️ Dual-Team Intel</h3>
+                    <p>Side-by-side strategic comparison of both teams simultaneously.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🛡️ Recovery Roadmap</h3>
+                    <p>Instant mitigation plans for structural weaknesses detected mid-game.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 InsightXI Elite Suite. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
